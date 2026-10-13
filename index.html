@@ -3,163 +3,288 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> GUJRATI TRADER - Learning Community</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<meta name="theme-color" content="#eef2f0">
+<title>Stock Learners | Stock Market Updates</title>
+<meta name="description" content="Explore stock market updates, market analysis and trading insights with Stock Learners.">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #000;
+:root {
+    --bg: #eef2f0;
+    --card: #ffffff;
+    --ink: #10231c;
+    --muted: #5b6b64;
+    --line: #dbe4df;
+    --up: #0b8a5a;
+    --up-dark: #076b46;
+    --down: #d6453d;
+    --chip: #f3f7f5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-  }
+    padding: 20px;
+    color: var(--ink);
+    background: var(--bg);
+}
 
-  .card {
-    width: 85%;
-    max-width: 340px; 
-    background: #010a0f;
-    border: 1.5px solid #00d2ff;
-    border-radius: 35px;
-    padding: 20px 15px;
-    text-align: center;
-    box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);
-  }
+.container { width: 100%; max-width: 440px; }
 
-  .profile-img {
-    width: 110px;
-    height: 110px;
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 18px 50px rgba(16,35,28,.10);
+}
+
+/* Candlestick header */
+.chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 7px;
+    height: 92px;
+    padding: 16px 22px 0;
+    background: linear-gradient(180deg, #e3f3ea 0%, #ffffff 100%);
+    border-bottom: 1px solid var(--line);
+}
+
+.candle {
+    position: relative;
+    flex: 1;
+    max-width: 14px;
+    height: var(--h);
+    border-radius: 3px 3px 0 0;
+    background: var(--up);
+    transform-origin: bottom;
+    animation: grow .9s cubic-bezier(.2,.8,.2,1) both;
+    animation-delay: calc(var(--i) * 45ms);
+}
+.candle.red { background: var(--down); }
+.candle::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    width: 2px;
+    height: 12px;
+    margin-left: -1px;
+    background: inherit;
+}
+
+@keyframes grow {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+}
+
+.body { padding: 0 22px 22px; text-align: center; }
+
+.profile {
+    display: block;
+    width: 112px;
+    height: 112px;
+    margin: -44px auto 14px;
     border-radius: 50%;
-    border: 3px solid #00d2ff;
     object-fit: cover;
-    margin-top: -5px;
-    box-shadow: 0 0 15px #00d2ff;
-  }
+    object-position: center;
+    aspect-ratio: 1 / 1;
+    background: var(--chip);
+    border: 5px solid var(--card);
+    box-shadow: 0 0 0 2px var(--up), 0 10px 24px rgba(11,138,90,.25);
+    position: relative;
+}
 
-  h1 {
+.badge {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--up-dark);
+    background: #e3f3ea;
+}
+
+h1 {
+    font-family: 'Bricolage Grotesque', 'DM Sans', sans-serif;
+    font-size: clamp(27px, 8vw, 34px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.5px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 340px;
+    margin: 0 auto 20px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 15px 18px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
     color: #fff;
-    font-size: 20px;
-    margin: 15px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
+    background: var(--up);
+    box-shadow: 0 8px 20px rgba(11,138,90,.28);
+    transition: background .2s, transform .2s;
+}
+.btn:hover { background: var(--up-dark); transform: translateY(-1px); }
+.btn:focus-visible, .agency a:focus-visible { outline: 3px solid #0b8a5a66; outline-offset: 3px; }
 
-  .features {
+.list {
+    margin-top: 20px;
+    display: grid;
+    gap: 8px;
     text-align: left;
-    margin: 0 auto;
-    width: 90%;
-  }
-
-  .feature-item {
-    color: #ccc;
-    font-size: 13px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.list div {
     display: flex;
     align-items: center;
-  }
-
-  .feature-item:last-child { border-bottom: none; }
-
-  .icon { margin-right: 12px; font-size: 16px; }
-
-  .join-text {
-    color: #eee;
-    font-size: 12px;
-    margin: 20px 0 12px;
-    font-weight: 300;
-  }
-
-  .telegram-btn {
-    display: block;
-    background: linear-gradient(90deg, #00d2ff 0%, #9247ff 100%);
-    color: white;
-    text-decoration: none;
-    padding: 14px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(0, 210, 255, 0.3);
-  }
-
-  .hindi-quote {
-    color: #bbb;
-    font-size: 13px;
-    margin-bottom: 20px;
-    line-height: 1.4;
-  }
-
-  .footer-box {
-    border: 1px solid rgba(0, 210, 255, 0.2);
+    gap: 10px;
+    padding: 11px 12px;
     border-radius: 12px;
-    padding: 8px;
-    font-size: 11px;
-    color: #888;
-  }
-
-  /* Link styling for Agency */
-  .footer-box a { 
-    color: #00d2ff; 
-    font-weight: bold; 
-    text-decoration: none;
-  }
-
-  .disclaimer {
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--chip);
+    border: 1px solid var(--line);
+}
+.list div::before {
+    content: "â–²";
     font-size: 9px;
-    color: #444;
-    margin-top: 12px;
-  }
+    color: var(--up);
+}
+.list div:nth-child(even)::before { content: "â–¼"; color: var(--down); }
+
+.free {
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--up-dark);
+}
+
+.disclaimer {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: left;
+    color: var(--muted);
+    background: var(--chip);
+    border: 1px solid var(--line);
+}
+.agency {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+    color: var(--muted);
+}
+.agency a { color: var(--up-dark); font-weight: 700; text-decoration: none; }
+.agency a:hover { text-decoration: underline; }
+
+@media (max-width: 380px) {
+    .body { padding: 0 16px 18px; }
+    .profile { width: 100px; height: 100px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .candle { animation: none; }
+    .btn { transition: none; }
+}
 </style>
 </head>
+
 <body>
+<div class="container">
+    <div class="card">
 
-<div class="card">
-  <img src="https://i.ibb.co/GQYGXHF4/In-Shot-20260927-223648191.jpg" alt=" GUJRATI TRADER" class="profile-img">
+        <div class="chart" aria-hidden="true">
+            <span class="candle" style="--h:28px;--i:0"></span>
+            <span class="candle red" style="--h:40px;--i:1"></span>
+            <span class="candle" style="--h:34px;--i:2"></span>
+            <span class="candle" style="--h:50px;--i:3"></span>
+            <span class="candle red" style="--h:42px;--i:4"></span>
+            <span class="candle" style="--h:56px;--i:5"></span>
+            <span class="candle" style="--h:48px;--i:6"></span>
+            <span class="candle red" style="--h:38px;--i:7"></span>
+            <span class="candle" style="--h:58px;--i:8"></span>
+            <span class="candle" style="--h:66px;--i:9"></span>
+            <span class="candle red" style="--h:54px;--i:10"></span>
+            <span class="candle" style="--h:72px;--i:11"></span>
+        </div>
 
-  <h1> GUJRATI TRADER</h1>
+        <div class="body">
+            <img
+                src="https://iili.io/nW8V0EF.jpg"
+                class="profile"
+                alt="Stock Learners logo"
+                width="112"
+                height="112"
+                fetchpriority="high"
+            >
 
-  <div class="features">
-    <div class="feature-item"><span class="icon"></span> Learning & Educational Sessions</div>
-    <div class="feature-item"><span class="icon"></span> Market Concepts & Awareness</div>
-    <div class="feature-item"><span class="icon"></span> Chart Reading Concepts</div>
-    <div class="feature-item"><span class="icon"></span> Educational Case Discussions</div>
-  </div>
+            <span class="badge">Stock market updates</span>
 
-  <p class="join-text">Join our learning community and grow your knowledge</p>
+            <h1>STOCK LEARNERS</h1>
 
-  <a href="https://t.me/+mc6hSYTJFoU0MmRl" class="telegram-btn">JOIN TELEGRAM</a>
+            <p class="subtitle">
+                Daily market updates, analysis and educational
+                trading insights on Nifty, Bank Nifty and stocks.
+            </p>
 
-  <p class="hindi-quote">     ,     </p>
+            <a
+                href="https://t.me/+v0QRhXFtzudkNTE1"
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+            >Join Telegram</a>
 
-  <div class="footer-box">
-    This Channel Advertise By <a href="https://t.me/+3XoqJNLxYHswNTc1" target="_blank">AD BUILD AGENCY</a>
-  </div>
+            <div class="list">
+                <div>Nifty 50 analysis</div>
+                <div>Bank Nifty updates</div>
+                <div>Stock market insights</div>
+                <div>Intraday market updates</div>
+                <div>Daily market levels</div>
+            </div>
 
-  <div class="disclaimer">
-    Terms | Privacy | Disclaimer <br>
-    This site is not part of Facebook™ or endorsed by Facebook™.
-  </div>
+            <div class="free">Free to join</div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> Content is for educational and
+                informational purposes only and is not investment advice or a
+                recommendation to buy or sell any security. Trading in the stock
+                market involves risk, and you may lose money. Past performance
+                does not guarantee future results. No profits or returns are
+                promised. Please consult a SEBI-registered advisor before making
+                any investment decision.
+            </div>
+
+            <div class="agency">
+                Ads &amp; Landing Page by
+                <a
+                    href="https://t.me/+3XoqJNLxYHswNTc1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >AdBuildagency</a>
+            </div>
+        </div>
+
+    </div>
 </div>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2552096918611818');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2552096918611818&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 </body>
+  
 </html>
